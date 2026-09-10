@@ -1,0 +1,15 @@
+class Solution {
+    static int max;
+    public int diameterOfBinaryTree(TreeNode root) {
+        max=0;
+        levels(root);
+        return max;
+    }
+    public int levels(TreeNode root){
+        if(root==null) return 0;
+        int rightLevels=levels(root.right);
+        int leftLevels=levels(root.left);
+        max=Math.max(max,rightLevels+leftLevels);
+        return 1+Math.max(rightLevels,leftLevels);
+    }
+}
