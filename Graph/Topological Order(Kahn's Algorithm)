@@ -33,3 +33,7 @@ class Solution{
         return ans;
     }
 }
+
+
+
+// if length of ans is less than no. of nodes then there is cycle in a directed graph
