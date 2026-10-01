@@ -1,0 +1,48 @@
+class Solution {
+    public int longestIncreasingPath(int[][] matrix) {
+        int n=matrix.length;
+        int m=matrix[0].length;
+        int[][] indegree=new int[n][m];
+        int[][] directions={{-1,0},{1,0},{0,-1},{0,1}};
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                for(int[] dir:directions){
+                    int ni=i+dir[0];
+                    int nj=j+dir[1];
+                    if(ni>=0 && nj>=0 && ni<n && nj<m && matrix[ni][nj]<matrix[i][j]){
+                        indegree[i][j]++;
+                    }
+                }
+            }
+        }
+        Queue<int[]> q=new LinkedList<>();
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(indegree[i][j]==0){
+                    q.add(new int[]{i,j});
+                }
+            }
+        }
+        int ans=0;
+        while(!q.isEmpty()){
+            int size=q.size();
+            ans++;
+            for(int k=0;k<size;k++){
+            int[] front=q.remove();
+            int i=front[0];
+            int j=front[1];
+            for(int[] dir: directions){
+                int ni=i+dir[0];
+                int nj=j+dir[1];
+                if(ni>=0 && nj>=0 && ni<n && nj<m && matrix[ni][nj]>matrix[i][j]){
+                    indegree[ni][nj]--;
+                    if(indegree[ni][nj]==0){
+                        q.add(new int[]{ni,nj});
+                    }
+                }
+            }
+        }
+        }
+        return ans;
+    }
+}

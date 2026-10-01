@@ -1,0 +1,17 @@
+class Solution {
+    public boolean canCross(int[] stones) {
+        int n=stones.length;
+        int[] dp=new int[n];
+        Arrays.fill(dp,-1);
+        return func(n-1,stones,dp);
+    }
+    public int func(int i, int[] stones, int[] dp){
+        if(i==0) return 0;
+        if(dp[i]!=-1) return dp[i];
+        int once=func(i-1,stones,dp)+(stones[i]-stones[i-1]);
+        if(i>1){
+            int twice=func(i-2,stones,dp)+(stones[i]-stones[i-2]);
+        }
+        return dp[i]=Math.min(once,twice);
+    }
+}
