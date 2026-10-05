@@ -1,0 +1,19 @@
+class Solution {
+    public int minRefuelStops(int target, int startFuel, int[][] stations) {
+        PriorityQueue<Integer> pq=new PriorityQueue<>(Collections.reverseOrder());
+        int i=0;
+        int maxDist=startFuel;
+        int stops=0;
+        int n=stations.length;
+        while(maxDist<target){
+            while(i<n && stations[i][0]<=maxDist){
+                pq.add(stations[i][1]);
+                i++;
+            }
+            if(pq.isEmpty()) return -1;
+            maxDist+=pq.remove();
+            stops++;
+        }
+        return stops;
+    }
+}
